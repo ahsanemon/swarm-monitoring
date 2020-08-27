@@ -2,7 +2,7 @@ version: '3'
 
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.9
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.0
     environment:
       ES_JAVA_OPTS: '-Xms256m -Xmx256m'
       xpack.security.enabled: 'false'
@@ -19,7 +19,7 @@ services:
           - node.role == manager # As I have a single manager cluster so the esdata volume will stay in the manager node
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:7.9
+    image: docker.elastic.co/logstash/logstash:7.9.0
     volumes:
       - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
     depends_on:
@@ -42,7 +42,7 @@ services:
         delay: 30s
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.9
+    image: docker.elastic.co/kibana/kibana:7.9.0
     ports:
       - '8081:5601'
     depends_on:
