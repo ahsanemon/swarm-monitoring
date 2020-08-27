@@ -3,12 +3,17 @@ version: '3'
 services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.9.0
+    ports:
+      - '9200:9200'
     environment:
-      ES_JAVA_OPTS: '-Xms256m -Xmx256m'
-      xpack.security.enabled: 'false'
-      xpack.monitoring.enabled: 'false'
-      xpack.graph.enabled: 'false'
-      xpack.watcher.enabled: 'false'
+      node.name: 'es01'
+      cluster.name: 'dev-efood'
+      cluster.initial_master_nodes: 'es01'
+      ES_JAVA_OPTS: '-Xms512m -Xmx512m'
+      ##xpack.security.enabled: 'true'
+      #xpack.monitoring.enabled: 'true'
+      xpack.graph.enabled: 'true'
+      #xpack.watcher.enabled: 'true'
     volumes:
       - esdata:/usr/share/elasticsearch/data
     deploy:
